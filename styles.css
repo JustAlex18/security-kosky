@@ -1,0 +1,1704 @@
+/* ═══════════════════════════════════════════════════════════════
+   styles.css — Security Kosky Corporate Linktree
+   Versión: 2.0 | 2026
+   Paleta: Azul #0d348c (marca) · Rojo #aa0404 (alerta)
+   Tipografía: Cascadia Code (título) · Corbel (resto)
+═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────
+   1. TOKENS DE DISEÑO (Custom Properties)
+───────────────────────────────────────────── */
+:root {
+  /* Colores de marca */
+  --color-brand:        #0d348c;
+  --color-brand-dark:   #091f5e;
+  --color-brand-light:  #1a4db3;
+  --color-accent:       #aa0404;
+  --color-accent-dark:  #880303;
+  --color-accent-light: #cc1515;
+
+  /* Fondo neutro-profesional */
+  --color-bg:           #f0f2f7;
+  --color-bg-card:      #ffffff;
+  --color-bg-subtle:    #e8ecf4;
+
+  /* Textos */
+  --color-text-primary:   #0d1a3a;
+  --color-text-secondary: #4a5573;
+  --color-text-muted:     #8491b2;
+  --color-text-onbrand:   #ffffff;
+
+  /* Tipografías */
+  --font-title:  'Cascadia Code', 'Courier New', monospace;
+  --font-body:   'Corbel', 'Candara', 'Calibri', 'Segoe UI', sans-serif;
+
+  /* Sombras */
+  --shadow-sm:   0 2px 8px rgba(13, 52, 140, 0.08);
+  --shadow-md:   0 8px 32px rgba(13, 52, 140, 0.14);
+  --shadow-lg:   0 20px 60px rgba(13, 52, 140, 0.20);
+  --shadow-btn:  0 4px 16px rgba(13, 52, 140, 0.30);
+
+  /* Bordes */
+  --radius-sm:  0.5rem;
+  --radius-md:  0.9rem;
+  --radius-lg:  1.4rem;
+  --radius-full: 50%;
+
+  /* Transición base */
+  --transition: all 0.3s ease;
+}
+
+/* ─────────────────────────────────────────────
+   2. RESET & BASE
+───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ─────────────────────────────────────────────
+   3. FONDO DECORATIVO — GRID ANIMADO
+───────────────────────────────────────────── */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 15% 15%, rgba(13, 52, 140, 0.10) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(170, 4, 4, 0.07) 0%, transparent 45%),
+    radial-gradient(rgba(13, 52, 140, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 36px 36px;
+}
+
+/* ─────────────────────────────────────────────
+   4. ANIMACIONES CLAVE
+───────────────────────────────────────────── */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulsRing {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  70%  { transform: scale(1.18); opacity: 0; }
+  100% { transform: scale(1.18); opacity: 0; }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.92) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ─────────────────────────────────────────────
+   5. LAYOUT PRINCIPAL — PAGE WRAPPER
+   Responsive & fluido: Mobile-First
+───────────────────────────────────────────── */
+.page-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem 3rem;
+}
+
+/* FIX: Garantiza ocultamiento absoluto de vistas aunque tengan display:flex en CSS.
+   El atributo [hidden] por defecto del navegador puede ser anulado por hojas autor. */
+#view-main[hidden],
+#view-catalog[hidden] {
+  display: none !important;
+}
+
+/* ─────────────────────────────────────────────
+   6. TARJETA CENTRAL — Diseño fluido
+───────────────────────────────────────────── */
+.card {
+  width: 100%;
+  max-width: min(42rem, 92vw);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: clamp(1.75rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 2.5rem);
+  animation: fadeSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  border-top: 4px solid var(--color-brand);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent);
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────
+   7. ENCABEZADO DE LA TARJETA
+───────────────────────────────────────────── */
+.card__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.8rem;
+  text-align: center;
+}
+
+/* ── Logo ring (anillo circular) ── */
+.logo-ring {
+  position: relative;
+  width: clamp(100px, 22vw, 130px);
+  height: clamp(100px, 22vw, 130px);
+  border-radius: var(--radius-full);
+  margin-bottom: 0.5rem;
+}
+
+.logo-img {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  object-position: center;
+  border: 3px solid var(--color-brand);
+  box-shadow: 0 0 0 5px rgba(13, 52, 140, 0.12), var(--shadow-md);
+  position: relative;
+  z-index: 1;
+}
+
+/* Fallback circular con iniciales */
+.logo-initials {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 700;
+  color: #fff;
+  border: 3px solid var(--color-brand);
+  box-shadow: 0 0 0 5px rgba(13, 52, 140, 0.12), var(--shadow-md);
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.05em;
+}
+
+/* Anillo de pulso animado */
+.logo-ring__pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-brand);
+  animation: pulsRing 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  pointer-events: none;
+}
+
+/* ── Título principal ── */
+.card__title {
+  font-family: var(--font-title);
+  font-size: clamp(1.45rem, 4.5vw, 2.1rem);
+  font-weight: 700;
+  color: var(--color-brand);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* ── Subtítulo ── */
+.card__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  color: var(--color-text-secondary);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* ── Separador decorativo ── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: clamp(160px, 55%, 260px);
+  margin-top: 0.4rem;
+}
+
+.divider__line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(13, 52, 140, 0.25), transparent);
+}
+
+.divider__icon {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* ─────────────────────────────────────────────
+   8. NAVEGACIÓN DE ENLACES
+───────────────────────────────────────────── */
+.links-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+/* ─────────────────────────────────────────────
+   9. BOTONES DE ENLACE — BASE
+───────────────────────────────────────────── */
+.link-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  padding: 0.95rem 1.2rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* Efecto de brillo hover */
+.link-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.18), transparent);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.link-btn:hover::after {
+  left: 140%;
+}
+
+/* Icono del botón */
+.link-btn__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+/* Texto principal del botón */
+.link-btn__text {
+  flex: 1;
+  line-height: 1.3;
+}
+
+/* Flecha indicadora */
+.link-btn__arrow {
+  font-size: 1.1rem;
+  opacity: 0.7;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.link-btn:hover .link-btn__arrow {
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+/* ── VARIANTE: Primario — WhatsApp ── */
+.link-btn--primary {
+  background: linear-gradient(135deg, #1aad19 0%, #128c0e 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(18, 140, 14, 0.35);
+}
+
+.link-btn--primary .link-btn__icon {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.link-btn--primary:hover {
+  background: linear-gradient(135deg, #22c61f 0%, #15a110 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(18, 140, 14, 0.45);
+}
+
+.link-btn--primary:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 12px rgba(18, 140, 14, 0.30);
+}
+
+/* ── VARIANTE: Secundario — Catálogo ── */
+.link-btn--secondary {
+  background: var(--color-bg-subtle);
+  color: var(--color-brand);
+  border: 1.5px solid rgba(13, 52, 140, 0.18);
+  box-shadow: var(--shadow-sm);
+}
+
+.link-btn--secondary .link-btn__icon {
+  background: rgba(13, 52, 140, 0.08);
+  color: var(--color-brand);
+}
+
+.link-btn--secondary:hover {
+  background: var(--color-brand);
+  color: #ffffff;
+  border-color: var(--color-brand);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-btn);
+}
+
+.link-btn--secondary:hover .link-btn__icon {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+/* ── VARIANTE: Acento — Redes Sociales ── */
+.link-btn--accent {
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-dark) 100%);
+  color: #ffffff;
+  box-shadow: var(--shadow-btn);
+  width: 100%;
+}
+
+.link-btn--accent .link-btn__icon {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.link-btn--accent:hover {
+  background: linear-gradient(135deg, var(--color-brand-light) 0%, var(--color-brand) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(13, 52, 140, 0.45);
+}
+
+.link-btn--accent:active {
+  transform: translateY(0);
+}
+
+/* ─────────────────────────────────────────────
+   10. ACORDEÓN — REDES SOCIALES
+───────────────────────────────────────────── */
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.accordion__trigger {
+  border-radius: var(--radius-md);
+  transition: border-radius 0.3s ease, var(--transition);
+}
+
+.accordion__trigger[aria-expanded="true"] {
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  box-shadow: 0 4px 16px rgba(13, 52, 140, 0.25);
+}
+
+.accordion__chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.accordion__chevron.is-rotated {
+  transform: rotate(180deg);
+}
+
+.accordion__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  background: #f5f7fc;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  border: 1.5px solid rgba(13, 52, 140, 0.12);
+  border-top: none;
+  overflow: hidden;
+}
+
+.accordion__panel.is-open {
+  grid-template-rows: 1fr;
+}
+
+.accordion__inner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 0;
+}
+
+/* ─────────────────────────────────────────────
+   11. ENLACES SOCIALES (dentro del acordeón)
+───────────────────────────────────────────── */
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.9rem 1.2rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.social-link + .social-link {
+  border-top: 1px solid rgba(13, 52, 140, 0.08);
+}
+
+.social-link::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: var(--transition);
+}
+
+.social-link__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 0.6rem;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.instagram-icon {
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #fff;
+}
+
+.gmail-icon {
+  background: linear-gradient(135deg, #ea4335 0%, #c5221f 100%);
+  color: #fff;
+}
+
+.social-link__name {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  transition: var(--transition);
+}
+
+.social-link__handle {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-left: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 45%;
+  transition: var(--transition);
+}
+
+.social-link__arrow {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.social-link:hover {
+  background: rgba(13, 52, 140, 0.05);
+}
+
+.social-link:hover::before {
+  background: var(--color-brand);
+}
+
+.social-link:hover .social-link__name {
+  color: var(--color-brand);
+}
+
+.social-link:hover .social-link__arrow {
+  color: var(--color-brand);
+  transform: translate(2px, -2px);
+}
+
+.social-link:hover .instagram-icon {
+  box-shadow: 0 4px 14px rgba(220, 39, 67, 0.4);
+  transform: scale(1.05);
+}
+
+.social-link:hover .gmail-icon {
+  box-shadow: 0 4px 14px rgba(234, 67, 53, 0.4);
+  transform: scale(1.05);
+}
+
+/* ─────────────────────────────────────────────
+   12. PIE DE PÁGINA
+───────────────────────────────────────────── */
+.card__footer {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(13, 52, 140, 0.10);
+  text-align: center;
+  position: relative;
+}
+
+.footer__text {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+.footer__dev {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.footer__dev strong {
+  color: var(--color-brand);
+  font-weight: 700;
+}
+
+/* Botón candado Admin — muy discreto */
+.admin-lock-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  opacity: 0.35;
+  transition: var(--transition);
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.admin-lock-btn:hover {
+  opacity: 0.75;
+  color: var(--color-brand);
+  background: rgba(13, 52, 140, 0.08);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECCIÓN: CATÁLOGO DIGITAL
+═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────
+   13. VISTA DE CATÁLOGO — Contenedor
+───────────────────────────────────────────── */
+.catalog-view {
+  align-items: flex-start;
+  padding: 2rem 1rem 3rem;
+}
+
+.catalog-container {
+  width: 100%;
+  max-width: min(70rem, 96vw);
+  animation: fadeSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ─────────────────────────────────────────────
+   14. ENCABEZADO DEL CATÁLOGO
+───────────────────────────────────────────── */
+.catalog-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.catalog-header__title-wrap {
+  flex: 1;
+}
+
+.catalog-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 700;
+  color: var(--color-brand);
+  line-height: 1.2;
+}
+
+.catalog-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Botón Volver */
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1.2rem;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-card);
+  color: var(--color-brand);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1.5px solid rgba(13, 52, 140, 0.2);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-back:hover {
+  background: var(--color-brand);
+  color: #fff;
+  border-color: var(--color-brand);
+  box-shadow: var(--shadow-btn);
+  transform: translateY(-1px);
+}
+
+.btn-back:hover svg {
+  transform: translateX(-3px);
+}
+
+.btn-back svg {
+  transition: transform 0.3s ease;
+}
+
+/* ─────────────────────────────────────────────
+   15. CUADRÍCULA DE PRODUCTOS
+───────────────────────────────────────────── */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+  gap: 1.5rem;
+}
+
+/* ─────────────────────────────────────────────
+   16. TARJETA DE PRODUCTO
+───────────────────────────────────────────── */
+.product-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: var(--transition);
+  border: 1px solid rgba(13, 52, 140, 0.08);
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.5s ease both;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(13, 52, 140, 0.2);
+}
+
+/* PLACEHOLDER de imagen del producto */
+.product-img-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #f0f2f7;
+  border-bottom: 1px solid rgba(13, 52, 140, 0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+}
+
+.product-img-placeholder__icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background: rgba(13, 52, 140, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(13, 52, 140, 0.3);
+}
+
+/* Cuerpo de la tarjeta del producto */
+.product-card__body {
+  padding: 1.1rem 1.2rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.4rem;
+}
+
+.product-card__name {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+.product-card__desc {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.product-card__price {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-brand);
+  margin-top: 0.4rem;
+}
+
+/* Botón de solicitar en tarjeta de producto */
+.product-card__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: 100%;
+  margin-top: 0.8rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #1aad19 0%, #128c0e 100%);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.product-card__btn:hover {
+  background: linear-gradient(135deg, #22c61f 0%, #15a110 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(18, 140, 14, 0.4);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECCIÓN: MODAL DE LOGIN ADMIN
+═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────
+   17. OVERLAY Y CAJA DEL MODAL
+───────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(9, 31, 94, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal-box {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2rem 1.75rem;
+  width: 100%;
+  max-width: 22rem;
+  box-shadow: 0 24px 64px rgba(9, 31, 94, 0.4);
+  border-top: 4px solid var(--color-brand);
+  animation: modalIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  text-align: center;
+}
+
+.modal-box__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-dark) 100%);
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.modal-box__title {
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-brand);
+  margin-bottom: 0.4rem;
+}
+
+.modal-box__desc {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1.4rem;
+}
+
+/* Campo del formulario modal */
+.modal-field {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.modal-field__label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+}
+
+.modal-field__input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1.5px solid rgba(13, 52, 140, 0.2);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  transition: var(--transition);
+  outline: none;
+}
+
+.modal-field__input:focus {
+  border-color: var(--color-brand);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(13, 52, 140, 0.1);
+}
+
+/* Mensaje de error */
+.modal-error {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--color-accent);
+  margin-bottom: 0.75rem;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  background: rgba(170, 4, 4, 0.07);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-accent);
+}
+
+.modal-error[hidden] {
+  display: none;
+}
+
+/* Acciones del modal */
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+
+.modal-btn--ghost {
+  background: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  border: 1.5px solid rgba(13, 52, 140, 0.12);
+}
+
+/* FIX 3 — Hover de cancelación con acento rojo discreto */
+.modal-btn--ghost:hover {
+  background: rgba(170, 4, 4, 0.07);
+  color: var(--color-accent);
+  border-color: rgba(170, 4, 4, 0.25);
+}
+
+.modal-btn--brand {
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-dark) 100%);
+  color: #fff;
+  box-shadow: var(--shadow-btn);
+}
+
+.modal-btn--brand:hover {
+  background: linear-gradient(135deg, var(--color-brand-light) 0%, var(--color-brand) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(13, 52, 140, 0.4);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECCIÓN: PANEL DE ADMINISTRACIÓN
+═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────
+   18. VISTA ADMIN — Contenedor
+───────────────────────────────────────────── */
+.admin-view {
+  align-items: flex-start;
+  padding: 2rem 1rem 3rem;
+}
+
+.admin-container {
+  width: 100%;
+  max-width: min(56rem, 96vw);
+  animation: fadeSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ─────────────────────────────────────────────
+   19. ENCABEZADO ADMIN
+───────────────────────────────────────────── */
+.admin-header {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 2rem;
+  margin-bottom: 1.5rem;
+  border-top: 4px solid var(--color-brand);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  position: relative;
+}
+
+.admin-header__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fff;
+  background: linear-gradient(135deg, #1db954 0%, #17943e 100%);
+  padding: 0.25rem 0.7rem;
+  border-radius: 2rem;
+  margin-bottom: 0.4rem;
+  width: fit-content;
+}
+
+.admin-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+  font-weight: 700;
+  color: var(--color-brand);
+  line-height: 1.2;
+}
+
+.admin-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+#btn-salir-admin {
+  margin-top: 1rem;
+  align-self: flex-start;
+}
+
+/* ─────────────────────────────────────────────
+   20. SECCIONES DEL PANEL ADMIN
+───────────────────────────────────────────── */
+.admin-section {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(13, 52, 140, 0.08);
+}
+
+.admin-section__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-brand);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(13, 52, 140, 0.1);
+}
+
+/* ─────────────────────────────────────────────
+   21. FORMULARIO ADMIN — Agregar producto
+───────────────────────────────────────────── */
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.admin-field__label {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.admin-field__label span {
+  color: var(--color-accent);
+}
+
+.admin-field__input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid rgba(13, 52, 140, 0.18);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  transition: var(--transition);
+  outline: none;
+}
+
+/* FIX 3 — Focus con acento rojo corporativo #aa0404 */
+.admin-field__input:focus {
+  border-color: var(--color-accent);
+  background: #fff;
+  box-shadow:
+    0 0 0 3px rgba(170, 4, 4, 0.12),
+    0 0 0 1px rgba(170, 4, 4, 0.25);
+}
+
+.admin-field__textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+/* Botón de agregar producto */
+.btn-add-product {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-dark) 100%);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  box-shadow: var(--shadow-btn);
+  align-self: flex-start;
+}
+
+.btn-add-product:hover {
+  background: linear-gradient(135deg, var(--color-brand-light) 0%, var(--color-brand) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(13, 52, 140, 0.4);
+}
+
+/* ─────────────────────────────────────────────
+   22. LISTA DE PRODUCTOS EN PANEL ADMIN
+───────────────────────────────────────────── */
+.admin-product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* FIX 1 — flex-wrap: permite que los botones bajen en móvil sin desbordarse */
+.admin-product-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(13, 52, 140, 0.1);
+  transition: var(--transition);
+  animation: fadeIn 0.4s ease both;
+}
+
+.admin-product-item:hover {
+  border-color: rgba(13, 52, 140, 0.2);
+  background: #edf0f8;
+}
+
+/* La miniatura de imagen/placeholder NO encoge nunca */
+.admin-product-item > .admin-item-thumb,
+.admin-product-item > .admin-item-thumb-placeholder {
+  flex-shrink: 0;
+}
+
+/* Info ocupa el espacio disponible; si no cabe, los botones bajan */
+.admin-product-item__info {
+  flex: 1 1 120px;
+  min-width: 0;
+}
+
+.admin-product-item__name {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-product-item__price {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--color-brand);
+  font-weight: 600;
+  margin-top: 0.1rem;
+}
+
+/* FIX 3 — Botón Eliminar: identidad roja #aa0404 más prominente */
+.btn-delete-product {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background: rgba(170, 4, 4, 0.10);
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px solid rgba(170, 4, 4, 0.30);
+  transition: var(--transition);
+  flex-shrink: 0;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.btn-delete-product:hover {
+  background: linear-gradient(135deg, var(--color-accent-light) 0%, var(--color-accent-dark) 100%);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(170, 4, 4, 0.40);
+  transform: translateY(-1px);
+}
+
+.btn-delete-product:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(170, 4, 4, 0.30);
+}
+
+/* Mensaje de lista vacía */
+.admin-empty-msg {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 1.5rem;
+  border: 1.5px dashed rgba(13, 52, 140, 0.15);
+  border-radius: var(--radius-md);
+}
+
+/* ─────────────────────────────────────────────
+   23. RESPONSIVE — Tablets y Desktop
+───────────────────────────────────────────── */
+
+/* Tablet: ≥ 600px */
+@media (min-width: 37.5rem) {
+  .page-wrapper {
+    padding: 2.5rem 2rem 4rem;
+    align-items: center;
+    min-height: 100dvh;
+  }
+
+  .catalog-view,
+  .admin-view {
+    align-items: flex-start;
+  }
+
+  .card {
+    max-width: min(44rem, 88vw);
+    padding: 2.5rem 2.5rem 2.25rem;
+  }
+
+  .social-link__handle {
+    max-width: 55%;
+  }
+}
+
+/* Desktop pequeño: ≥ 900px */
+@media (min-width: 56.25rem) {
+  .page-wrapper {
+    padding: 3rem 2.5rem 4rem;
+  }
+
+  .card {
+    max-width: min(48rem, 80vw);
+    padding: 3rem 3rem 2.5rem;
+  }
+
+  .link-btn {
+    padding: 1.05rem 1.4rem;
+  }
+
+  .catalog-view,
+  .admin-view {
+    padding: 3rem 2.5rem 4rem;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+/* Desktop grande: ≥ 1200px */
+@media (min-width: 75rem) {
+  .card {
+    max-width: 50rem;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+/* ─────────────────────────────────────────────
+   24. Formulario admin en mobile — 1 columna
+───────────────────────────────────────────── */
+@media (max-width: 37.4rem) {
+  .admin-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   25. ACCESIBILIDAD — FOCUS VISIBLE
+───────────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Reducir movimiento si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   26. MODAL PANEL ADMIN — variante ancha y scrollable
+═══════════════════════════════════════════════════════════════ */
+
+/* Overlay del panel admin (igual base que login, pero alinea arriba en móvil) */
+.modal-overlay--panel {
+  align-items: flex-start;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+@media (min-width: 37.5rem) {
+  .modal-overlay--panel {
+    align-items: center;
+    padding: 2rem;
+  }
+}
+
+/* Caja del panel admin — más ancha que el modal de login */
+.modal-box--panel {
+  max-width: 44rem;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  max-height: 90dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Encabezado del panel (fijo, no scroll) ── */
+.admin-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-dark) 100%);
+  border-bottom: none;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+}
+
+.admin-panel-header .admin-header__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.15);
+  padding: 0.2rem 0.6rem;
+  border-radius: 2rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.admin-panel-header__titles {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-panel-header .admin-title {
+  color: #fff;
+  font-size: clamp(1rem, 3vw, 1.35rem);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.admin-panel-header .admin-subtitle {
+  color: rgba(255,255,255,0.75);
+  font-size: 0.75rem;
+  margin-top: 0.1rem;
+}
+
+/* Botón X para cerrar el panel */
+.btn-close-panel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.btn-close-panel:hover {
+  background: rgba(255,255,255,0.25);
+  transform: rotate(90deg);
+}
+
+/* ── Cuerpo scrollable del panel ── */
+.admin-panel-body {
+  overflow-y: auto;
+  flex: 1;
+  padding: 1.25rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   27. CAMPO DE IMAGEN — FileReader Upload
+═══════════════════════════════════════════════════════════════ */
+
+/* Input file nativo — oculto visualmente */
+.file-input-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+}
+
+/* Label estilizado que actúa como botón de selección */
+.file-input-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1.5px dashed rgba(13, 52, 140, 0.3);
+  background: rgba(13, 52, 140, 0.04);
+  color: var(--color-brand);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  width: 100%;
+}
+
+.file-input-label:hover {
+  background: rgba(13, 52, 140, 0.09);
+  border-color: var(--color-brand);
+}
+
+.file-input-wrapper {
+  position: relative;
+}
+
+/* Área de preview de imagen seleccionada */
+.img-preview-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.6rem;
+  padding: 0.6rem;
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(13, 52, 140, 0.12);
+}
+
+.img-preview-wrap[hidden] {
+  display: none;
+}
+
+.img-preview {
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 2px solid rgba(13, 52, 140, 0.15);
+  flex-shrink: 0;
+}
+
+/* Botón para quitar la imagen seleccionada */
+.btn-clear-img {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: rgba(170, 4, 4, 0.08);
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid rgba(170, 4, 4, 0.15);
+  transition: var(--transition);
+}
+
+.btn-clear-img:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   28. ACCIONES DEL FORMULARIO ADMIN — Agregar / Editar
+═══════════════════════════════════════════════════════════════ */
+
+.admin-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Botón cancelar edición */
+.btn-cancel-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.1rem;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: 1.5px solid rgba(13, 52, 140, 0.15);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-cancel-edit[hidden] {
+  display: none;
+}
+
+/* FIX 3 — Hover de cancelar edición con acento rojo corporativo */
+.btn-cancel-edit:hover {
+  background: rgba(170, 4, 4, 0.07);
+  color: var(--color-accent);
+  border-color: rgba(170, 4, 4, 0.25);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   29. INVENTARIO — botón Modificar añadido a cada ítem
+═══════════════════════════════════════════════════════════════ */
+
+/* Grupo de botones de acción en el ítem del inventario */
+.admin-product-item__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  justify-content: flex-end;
+}
+
+/* Botón de modificar */
+.btn-edit-product {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background: rgba(13, 52, 140, 0.07);
+  color: var(--color-brand);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid rgba(13, 52, 140, 0.15);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.btn-edit-product:hover {
+  background: var(--color-brand);
+  color: #fff;
+  border-color: var(--color-brand);
+  box-shadow: 0 4px 12px rgba(13, 52, 140, 0.3);
+}
+
+/* Miniatura de imagen en el ítem del inventario */
+.admin-item-thumb {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(13, 52, 140, 0.12);
+}
+
+.admin-item-thumb-placeholder {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: var(--radius-sm);
+  background: rgba(13, 52, 140, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: rgba(13, 52, 140, 0.25);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   30. IMAGEN REAL en tarjetas del catálogo
+═══════════════════════════════════════════════════════════════ */
+
+/* Imagen real cuando está disponible — mismo tamaño que el placeholder */
+.product-img-real {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(13, 52, 140, 0.07);
+  display: block;
+}
+
