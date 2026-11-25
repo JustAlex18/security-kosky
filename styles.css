@@ -1,15 +1,5 @@
-/* ═══════════════════════════════════════════════════════════════
-   styles.css — Security Kosky Corporate Linktree
-   Versión: 2.0 | 2026
-   Paleta: Azul #0d348c (marca) · Rojo #aa0404 (alerta)
-   Tipografía: Cascadia Code (título) · Corbel (resto)
-═══════════════════════════════════════════════════════════════ */
-
-/* ─────────────────────────────────────────────
-   1. TOKENS DE DISEÑO (Custom Properties)
-───────────────────────────────────────────── */
-:root {
-  /* Colores de marca */
+﻿:root {
+  
   --color-brand:        #0d348c;
   --color-brand-dark:   #091f5e;
   --color-brand-light:  #1a4db3;
@@ -17,40 +7,37 @@
   --color-accent-dark:  #880303;
   --color-accent-light: #cc1515;
 
-  /* Fondo neutro-profesional */
+  
   --color-bg:           #f0f2f7;
   --color-bg-card:      #ffffff;
   --color-bg-subtle:    #e8ecf4;
 
-  /* Textos */
+  
   --color-text-primary:   #0d1a3a;
   --color-text-secondary: #4a5573;
   --color-text-muted:     #8491b2;
   --color-text-onbrand:   #ffffff;
 
-  /* Tipografías */
+  
   --font-title:  'Cascadia Code', 'Courier New', monospace;
   --font-body:   'Corbel', 'Candara', 'Calibri', 'Segoe UI', sans-serif;
 
-  /* Sombras */
+  
   --shadow-sm:   0 2px 8px rgba(13, 52, 140, 0.08);
   --shadow-md:   0 8px 32px rgba(13, 52, 140, 0.14);
   --shadow-lg:   0 20px 60px rgba(13, 52, 140, 0.20);
   --shadow-btn:  0 4px 16px rgba(13, 52, 140, 0.30);
 
-  /* Bordes */
+  
   --radius-sm:  0.5rem;
   --radius-md:  0.9rem;
   --radius-lg:  1.4rem;
   --radius-full: 50%;
 
-  /* Transición base */
+  
   --transition: all 0.3s ease;
 }
 
-/* ─────────────────────────────────────────────
-   2. RESET & BASE
-───────────────────────────────────────────── */
 *,
 *::before,
 *::after {
@@ -95,9 +82,6 @@ button {
   background: none;
 }
 
-/* ─────────────────────────────────────────────
-   3. FONDO DECORATIVO — GRID ANIMADO
-───────────────────────────────────────────── */
 .bg-grid {
   position: fixed;
   inset: 0;
@@ -110,9 +94,6 @@ button {
   background-size: 100% 100%, 100% 100%, 36px 36px;
 }
 
-/* ─────────────────────────────────────────────
-   4. ANIMACIONES CLAVE
-───────────────────────────────────────────── */
 @keyframes fadeSlideUp {
   from {
     opacity: 0;
@@ -140,10 +121,6 @@ button {
   to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* ─────────────────────────────────────────────
-   5. LAYOUT PRINCIPAL — PAGE WRAPPER
-   Responsive & fluido: Mobile-First
-───────────────────────────────────────────── */
 .page-wrapper {
   position: relative;
   z-index: 1;
@@ -155,16 +132,11 @@ button {
   padding: 2rem 1rem 3rem;
 }
 
-/* FIX: Garantiza ocultamiento absoluto de vistas aunque tengan display:flex en CSS.
-   El atributo [hidden] por defecto del navegador puede ser anulado por hojas autor. */
 #view-main[hidden],
 #view-catalog[hidden] {
   display: none !important;
 }
 
-/* ─────────────────────────────────────────────
-   6. TARJETA CENTRAL — Diseño fluido
-───────────────────────────────────────────── */
 .card {
   width: 100%;
   max-width: min(42rem, 92vw);
@@ -189,9 +161,6 @@ button {
   pointer-events: none;
 }
 
-/* ─────────────────────────────────────────────
-   7. ENCABEZADO DE LA TARJETA
-───────────────────────────────────────────── */
 .card__header {
   display: flex;
   flex-direction: column;
@@ -201,7 +170,6 @@ button {
   text-align: center;
 }
 
-/* ── Logo ring (anillo circular) ── */
 .logo-ring {
   position: relative;
   width: clamp(100px, 22vw, 130px);
@@ -222,7 +190,6 @@ button {
   z-index: 1;
 }
 
-/* Fallback circular con iniciales */
 .logo-initials {
   width: 100%;
   height: 100%;
@@ -242,7 +209,6 @@ button {
   letter-spacing: 0.05em;
 }
 
-/* Anillo de pulso animado */
 .logo-ring__pulse {
   position: absolute;
   inset: -6px;
@@ -252,7 +218,6 @@ button {
   pointer-events: none;
 }
 
-/* ── Título principal ── */
 .card__title {
   font-family: var(--font-title);
   font-size: clamp(1.45rem, 4.5vw, 2.1rem);
@@ -262,7 +227,6 @@ button {
   line-height: 1.2;
 }
 
-/* ── Subtítulo ── */
 .card__subtitle {
   font-family: var(--font-body);
   font-size: clamp(0.85rem, 2.5vw, 1rem);
@@ -272,7 +236,6 @@ button {
   text-transform: uppercase;
 }
 
-/* ── Separador decorativo ── */
 .divider {
   display: flex;
   align-items: center;
@@ -292,18 +255,12 @@ button {
   opacity: 0.8;
 }
 
-/* ─────────────────────────────────────────────
-   8. NAVEGACIÓN DE ENLACES
-───────────────────────────────────────────── */
 .links-nav {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
 }
 
-/* ─────────────────────────────────────────────
-   9. BOTONES DE ENLACE — BASE
-───────────────────────────────────────────── */
 .link-btn {
   display: flex;
   align-items: center;
@@ -322,7 +279,6 @@ button {
   text-align: left;
 }
 
-/* Efecto de brillo hover */
 .link-btn::after {
   content: '';
   position: absolute;
@@ -339,7 +295,6 @@ button {
   left: 140%;
 }
 
-/* Icono del botón */
 .link-btn__icon {
   display: flex;
   align-items: center;
@@ -351,13 +306,11 @@ button {
   transition: var(--transition);
 }
 
-/* Texto principal del botón */
 .link-btn__text {
   flex: 1;
   line-height: 1.3;
 }
 
-/* Flecha indicadora */
 .link-btn__arrow {
   font-size: 1.1rem;
   opacity: 0.7;
@@ -370,7 +323,6 @@ button {
   opacity: 1;
 }
 
-/* ── VARIANTE: Primario — WhatsApp ── */
 .link-btn--primary {
   background: linear-gradient(135deg, #1aad19 0%, #128c0e 100%);
   color: #ffffff;
@@ -392,7 +344,6 @@ button {
   box-shadow: 0 3px 12px rgba(18, 140, 14, 0.30);
 }
 
-/* ── VARIANTE: Secundario — Catálogo ── */
 .link-btn--secondary {
   background: var(--color-bg-subtle);
   color: var(--color-brand);
@@ -418,7 +369,6 @@ button {
   color: #ffffff;
 }
 
-/* ── VARIANTE: Acento — Redes Sociales ── */
 .link-btn--accent {
   background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-dark) 100%);
   color: #ffffff;
@@ -440,9 +390,6 @@ button {
   transform: translateY(0);
 }
 
-/* ─────────────────────────────────────────────
-   10. ACORDEÓN — REDES SOCIALES
-───────────────────────────────────────────── */
 .accordion {
   display: flex;
   flex-direction: column;
@@ -495,9 +442,6 @@ button {
   min-height: 0;
 }
 
-/* ─────────────────────────────────────────────
-   11. ENLACES SOCIALES (dentro del acordeón)
-───────────────────────────────────────────── */
 .social-link {
   display: flex;
   align-items: center;
@@ -596,9 +540,6 @@ button {
   transform: scale(1.05);
 }
 
-/* ─────────────────────────────────────────────
-   12. PIE DE PÁGINA
-───────────────────────────────────────────── */
 .card__footer {
   margin-top: 2rem;
   padding-top: 1.25rem;
@@ -624,7 +565,6 @@ button {
   font-weight: 700;
 }
 
-/* Botón candado Admin — muy discreto */
 .admin-lock-btn {
   display: inline-flex;
   align-items: center;
@@ -645,13 +585,6 @@ button {
   background: rgba(13, 52, 140, 0.08);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SECCIÓN: CATÁLOGO DIGITAL
-═══════════════════════════════════════════════════════════════ */
-
-/* ─────────────────────────────────────────────
-   13. VISTA DE CATÁLOGO — Contenedor
-───────────────────────────────────────────── */
 .catalog-view {
   align-items: flex-start;
   padding: 2rem 1rem 3rem;
@@ -663,9 +596,6 @@ button {
   animation: fadeSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* ─────────────────────────────────────────────
-   14. ENCABEZADO DEL CATÁLOGO
-───────────────────────────────────────────── */
 .catalog-header {
   display: flex;
   align-items: center;
@@ -695,7 +625,6 @@ button {
   letter-spacing: 0.04em;
 }
 
-/* Botón Volver */
 .btn-back {
   display: inline-flex;
   align-items: center;
@@ -730,18 +659,12 @@ button {
   transition: transform 0.3s ease;
 }
 
-/* ─────────────────────────────────────────────
-   15. CUADRÍCULA DE PRODUCTOS
-───────────────────────────────────────────── */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
   gap: 1.5rem;
 }
 
-/* ─────────────────────────────────────────────
-   16. TARJETA DE PRODUCTO
-───────────────────────────────────────────── */
 .product-card {
   background: var(--color-bg-card);
   border-radius: var(--radius-lg);
@@ -760,7 +683,6 @@ button {
   border-color: rgba(13, 52, 140, 0.2);
 }
 
-/* PLACEHOLDER de imagen del producto */
 .product-img-placeholder {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -788,7 +710,6 @@ button {
   color: rgba(13, 52, 140, 0.3);
 }
 
-/* Cuerpo de la tarjeta del producto */
 .product-card__body {
   padding: 1.1rem 1.2rem 1.3rem;
   display: flex;
@@ -821,7 +742,6 @@ button {
   margin-top: 0.4rem;
 }
 
-/* Botón de solicitar en tarjeta de producto */
 .product-card__btn {
   display: flex;
   align-items: center;
@@ -848,13 +768,6 @@ button {
   box-shadow: 0 6px 20px rgba(18, 140, 14, 0.4);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SECCIÓN: MODAL DE LOGIN ADMIN
-═══════════════════════════════════════════════════════════════ */
-
-/* ─────────────────────────────────────────────
-   17. OVERLAY Y CAJA DEL MODAL
-───────────────────────────────────────────── */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -911,7 +824,6 @@ button {
   margin-bottom: 1.4rem;
 }
 
-/* Campo del formulario modal */
 .modal-field {
   text-align: left;
   margin-bottom: 1rem;
@@ -947,7 +859,6 @@ button {
   box-shadow: 0 0 0 3px rgba(13, 52, 140, 0.1);
 }
 
-/* Mensaje de error */
 .modal-error {
   font-family: var(--font-body);
   font-size: 0.8rem;
@@ -964,7 +875,6 @@ button {
   display: none;
 }
 
-/* Acciones del modal */
 .modal-actions {
   display: flex;
   gap: 0.75rem;
@@ -989,7 +899,6 @@ button {
   border: 1.5px solid rgba(13, 52, 140, 0.12);
 }
 
-/* FIX 3 — Hover de cancelación con acento rojo discreto */
 .modal-btn--ghost:hover {
   background: rgba(170, 4, 4, 0.07);
   color: var(--color-accent);
@@ -1008,13 +917,6 @@ button {
   box-shadow: 0 6px 20px rgba(13, 52, 140, 0.4);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SECCIÓN: PANEL DE ADMINISTRACIÓN
-═══════════════════════════════════════════════════════════════ */
-
-/* ─────────────────────────────────────────────
-   18. VISTA ADMIN — Contenedor
-───────────────────────────────────────────── */
 .admin-view {
   align-items: flex-start;
   padding: 2rem 1rem 3rem;
@@ -1026,9 +928,6 @@ button {
   animation: fadeSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* ─────────────────────────────────────────────
-   19. ENCABEZADO ADMIN
-───────────────────────────────────────────── */
 .admin-header {
   background: var(--color-bg-card);
   border-radius: var(--radius-lg);
@@ -1080,9 +979,6 @@ button {
   align-self: flex-start;
 }
 
-/* ─────────────────────────────────────────────
-   20. SECCIONES DEL PANEL ADMIN
-───────────────────────────────────────────── */
 .admin-section {
   background: var(--color-bg-card);
   border-radius: var(--radius-lg);
@@ -1107,9 +1003,6 @@ button {
   border-bottom: 1px solid rgba(13, 52, 140, 0.1);
 }
 
-/* ─────────────────────────────────────────────
-   21. FORMULARIO ADMIN — Agregar producto
-───────────────────────────────────────────── */
 .admin-form {
   display: flex;
   flex-direction: column;
@@ -1154,7 +1047,6 @@ button {
   outline: none;
 }
 
-/* FIX 3 — Focus con acento rojo corporativo #aa0404 */
 .admin-field__input:focus {
   border-color: var(--color-accent);
   background: #fff;
@@ -1169,7 +1061,6 @@ button {
   line-height: 1.5;
 }
 
-/* Botón de agregar producto */
 .btn-add-product {
   display: inline-flex;
   align-items: center;
@@ -1195,16 +1086,12 @@ button {
   box-shadow: 0 8px 24px rgba(13, 52, 140, 0.4);
 }
 
-/* ─────────────────────────────────────────────
-   22. LISTA DE PRODUCTOS EN PANEL ADMIN
-───────────────────────────────────────────── */
 .admin-product-list {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-/* FIX 1 — flex-wrap: permite que los botones bajen en móvil sin desbordarse */
 .admin-product-item {
   display: flex;
   flex-wrap: wrap;
@@ -1223,13 +1110,11 @@ button {
   background: #edf0f8;
 }
 
-/* La miniatura de imagen/placeholder NO encoge nunca */
 .admin-product-item > .admin-item-thumb,
 .admin-product-item > .admin-item-thumb-placeholder {
   flex-shrink: 0;
 }
 
-/* Info ocupa el espacio disponible; si no cabe, los botones bajan */
 .admin-product-item__info {
   flex: 1 1 120px;
   min-width: 0;
@@ -1253,7 +1138,6 @@ button {
   margin-top: 0.1rem;
 }
 
-/* FIX 3 — Botón Eliminar: identidad roja #aa0404 más prominente */
 .btn-delete-product {
   display: inline-flex;
   align-items: center;
@@ -1287,7 +1171,6 @@ button {
   box-shadow: 0 2px 6px rgba(170, 4, 4, 0.30);
 }
 
-/* Mensaje de lista vacía */
 .admin-empty-msg {
   font-family: var(--font-body);
   font-size: 0.88rem;
@@ -1298,11 +1181,6 @@ button {
   border-radius: var(--radius-md);
 }
 
-/* ─────────────────────────────────────────────
-   23. RESPONSIVE — Tablets y Desktop
-───────────────────────────────────────────── */
-
-/* Tablet: ≥ 600px */
 @media (min-width: 37.5rem) {
   .page-wrapper {
     padding: 2.5rem 2rem 4rem;
@@ -1325,7 +1203,6 @@ button {
   }
 }
 
-/* Desktop pequeño: ≥ 900px */
 @media (min-width: 56.25rem) {
   .page-wrapper {
     padding: 3rem 2.5rem 4rem;
@@ -1350,7 +1227,6 @@ button {
   }
 }
 
-/* Desktop grande: ≥ 1200px */
 @media (min-width: 75rem) {
   .card {
     max-width: 50rem;
@@ -1361,9 +1237,6 @@ button {
   }
 }
 
-/* ─────────────────────────────────────────────
-   24. Formulario admin en mobile — 1 columna
-───────────────────────────────────────────── */
 @media (max-width: 37.4rem) {
   .admin-form__grid {
     grid-template-columns: 1fr;
@@ -1375,16 +1248,12 @@ button {
   }
 }
 
-/* ─────────────────────────────────────────────
-   25. ACCESIBILIDAD — FOCUS VISIBLE
-───────────────────────────────────────────── */
 :focus-visible {
   outline: 3px solid var(--color-brand);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
 
-/* Reducir movimiento si el usuario lo prefiere */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1394,11 +1263,6 @@ button {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   26. MODAL PANEL ADMIN — variante ancha y scrollable
-═══════════════════════════════════════════════════════════════ */
-
-/* Overlay del panel admin (igual base que login, pero alinea arriba en móvil) */
 .modal-overlay--panel {
   align-items: flex-start;
   padding: 1rem;
@@ -1412,7 +1276,6 @@ button {
   }
 }
 
-/* Caja del panel admin — más ancha que el modal de login */
 .modal-box--panel {
   max-width: 44rem;
   width: 100%;
@@ -1423,7 +1286,6 @@ button {
   flex-direction: column;
 }
 
-/* ── Encabezado del panel (fijo, no scroll) ── */
 .admin-panel-header {
   display: flex;
   align-items: center;
@@ -1469,7 +1331,6 @@ button {
   margin-top: 0.1rem;
 }
 
-/* Botón X para cerrar el panel */
 .btn-close-panel {
   display: inline-flex;
   align-items: center;
@@ -1490,7 +1351,6 @@ button {
   transform: rotate(90deg);
 }
 
-/* ── Cuerpo scrollable del panel ── */
 .admin-panel-body {
   overflow-y: auto;
   flex: 1;
@@ -1500,11 +1360,6 @@ button {
   gap: 0;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   27. CAMPO DE IMAGEN — FileReader Upload
-═══════════════════════════════════════════════════════════════ */
-
-/* Input file nativo — oculto visualmente */
 .file-input-hidden {
   position: absolute;
   width: 1px;
@@ -1515,7 +1370,6 @@ button {
   clip: rect(0,0,0,0);
 }
 
-/* Label estilizado que actúa como botón de selección */
 .file-input-label {
   display: inline-flex;
   align-items: center;
@@ -1542,7 +1396,6 @@ button {
   position: relative;
 }
 
-/* Área de preview de imagen seleccionada */
 .img-preview-wrap {
   display: flex;
   align-items: center;
@@ -1567,7 +1420,6 @@ button {
   flex-shrink: 0;
 }
 
-/* Botón para quitar la imagen seleccionada */
 .btn-clear-img {
   display: inline-flex;
   align-items: center;
@@ -1589,10 +1441,6 @@ button {
   color: #fff;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   28. ACCIONES DEL FORMULARIO ADMIN — Agregar / Editar
-═══════════════════════════════════════════════════════════════ */
-
 .admin-form-actions {
   display: flex;
   align-items: center;
@@ -1600,7 +1448,6 @@ button {
   flex-wrap: wrap;
 }
 
-/* Botón cancelar edición */
 .btn-cancel-edit {
   display: inline-flex;
   align-items: center;
@@ -1621,18 +1468,12 @@ button {
   display: none;
 }
 
-/* FIX 3 — Hover de cancelar edición con acento rojo corporativo */
 .btn-cancel-edit:hover {
   background: rgba(170, 4, 4, 0.07);
   color: var(--color-accent);
   border-color: rgba(170, 4, 4, 0.25);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   29. INVENTARIO — botón Modificar añadido a cada ítem
-═══════════════════════════════════════════════════════════════ */
-
-/* Grupo de botones de acción en el ítem del inventario */
 .admin-product-item__actions {
   display: flex;
   flex-wrap: wrap;
@@ -1641,7 +1482,6 @@ button {
   justify-content: flex-end;
 }
 
-/* Botón de modificar */
 .btn-edit-product {
   display: inline-flex;
   align-items: center;
@@ -1667,7 +1507,6 @@ button {
   box-shadow: 0 4px 12px rgba(13, 52, 140, 0.3);
 }
 
-/* Miniatura de imagen en el ítem del inventario */
 .admin-item-thumb {
   width: 2.8rem;
   height: 2.8rem;
@@ -1689,11 +1528,6 @@ button {
   color: rgba(13, 52, 140, 0.25);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   30. IMAGEN REAL en tarjetas del catálogo
-═══════════════════════════════════════════════════════════════ */
-
-/* Imagen real cuando está disponible — mismo tamaño que el placeholder */
 .product-img-real {
   width: 100%;
   aspect-ratio: 4 / 3;
